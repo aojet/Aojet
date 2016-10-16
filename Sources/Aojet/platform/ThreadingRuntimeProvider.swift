@@ -6,6 +6,8 @@
 //  Copyright © 2016 Qihe Bian. All rights reserved.
 //
 
+import Foundation
+
 class ThreadingRuntimeProvider: ThreadingRuntime {
 
   func actorTime() -> TimeInterval {

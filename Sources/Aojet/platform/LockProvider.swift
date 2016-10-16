@@ -6,6 +6,8 @@
 //  Copyright © 2016 Qihe Bian. All rights reserved.
 //
 
+import Foundation
+
 class LockProvider: Lock {
   private var mutex = pthread_mutex_t()
   private var attr = pthread_mutexattr_t()

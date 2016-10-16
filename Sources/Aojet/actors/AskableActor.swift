@@ -6,6 +6,8 @@
 //  Copyright © 2016 Qihe Bian. All rights reserved.
 //
 
+import Foundation
+
 open class AskableActor: Actor {
   open func onAsk(message: Any) throws -> Promise<Any>? {
     throw RuntimeException.general(message: "Not implemented")

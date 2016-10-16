@@ -6,6 +6,8 @@
 //  Copyright © 2016 Qihe Bian. All rights reserved.
 //
 
+import Foundation
+
 class ImmediateDispatcherProvider: ImmediateDispatcher {
   let threadPool: ThreadPool
   let lock = Runtime.createLock()
