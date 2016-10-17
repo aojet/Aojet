@@ -1,2 +1,2 @@
-# Aojet
+# Aojet [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/aojet/Aojet/master/LICENSE.md) [![GitHub release](https://img.shields.io/github/release/aojet/Aojet.svg)](https://github.com/aojet/Aojet/releases) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/aojet/Aojet)
 An actor model library for swift.
