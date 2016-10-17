@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C3F570D1DA7348C00FBD824"
+               BlueprintIdentifier = "8C5EFD541DB4D39700885B4E"
                BuildableName = "Aojet.framework"
-               BlueprintName = "Aojet"
+               BlueprintName = "Aojet-Mac"
                ReferencedContainer = "container:Aojet.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C3F57161DA7348C00FBD824"
-               BuildableName = "Tests.xctest"
-               BlueprintName = "Tests"
-               ReferencedContainer = "container:Aojet.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C3F570D1DA7348C00FBD824"
-            BuildableName = "Aojet.framework"
-            BlueprintName = "Aojet"
-            ReferencedContainer = "container:Aojet.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C3F570D1DA7348C00FBD824"
+            BlueprintIdentifier = "8C5EFD541DB4D39700885B4E"
             BuildableName = "Aojet.framework"
-            BlueprintName = "Aojet"
+            BlueprintName = "Aojet-Mac"
             ReferencedContainer = "container:Aojet.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C3F570D1DA7348C00FBD824"
+            BlueprintIdentifier = "8C5EFD541DB4D39700885B4E"
             BuildableName = "Aojet.framework"
-            BlueprintName = "Aojet"
+            BlueprintName = "Aojet-Mac"
             ReferencedContainer = "container:Aojet.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
