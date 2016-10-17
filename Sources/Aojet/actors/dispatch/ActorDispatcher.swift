@@ -6,6 +6,8 @@
 //  Copyright © 2016 Qihe Bian. All rights reserved.
 //
 
+import Foundation
+
 public class ActorDispatcher {
   final let lock = Runtime.createLock()
   final var endpoints = Dictionary<String, ActorEndpoint>()
