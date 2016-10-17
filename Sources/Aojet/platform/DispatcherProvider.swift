@@ -16,8 +16,8 @@ class DispatcherProvider: Dispatcher {
   }
 
   func dispatch(runnable: Runnable, delay: TimeInterval) -> DispatchCancel {
-    let q = DispatchQueue(label: "aojet.actor.default", qos: .default, attributes: .initiallyInactive, autoreleaseFrequency: .inherit, target: nil)
-    q.asyncAfter(deadline: DispatchTime.now() + delay) { 
+    let q = DispatchQueue(label: "aojet.actor.background", attributes: [])
+    q.asyncAfter(deadline: DispatchTime.now() + delay) {
       runnable.run()
     }
     return DispatchCancelImpl()
