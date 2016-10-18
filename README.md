@@ -6,6 +6,16 @@
 
 Aojet is an [actor model](https://en.wikipedia.org/wiki/Actor_model) implemetion for swift.
 
+## Features
+
+- [x] Asynchronous, non-blocking and highly performant message-driven programming model
+- [x] Safe as well as efficient messaging
+- [x] Message ordering using Local Synchronization Constraints
+- [x] Fair scheduling
+- [x] Modular and extensible
+- [x] A [promise](https://en.wikipedia.org/wiki/Futures_and_promises) implementation for general usage
+- [ ] Portable(Support iOS and Mac platform currently)
+
 ## Requirements
 
 - Swift 3.0
