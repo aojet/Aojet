@@ -6,7 +6,7 @@
 //  Copyright © 2016 Qihe Bian. All rights reserved.
 //
 
-protocol TraceInterface {
+public protocol TraceInterface {
 
   func onEnvelopeDelivered(envelope: Envelope)
   func onEnvelopeProcessed(envelope: Envelope, duration: TimeInterval)

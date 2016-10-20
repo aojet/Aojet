@@ -6,12 +6,13 @@
 //  Copyright © 2016 Qihe Bian. All rights reserved.
 //
 
-class RuntimeEnvironment {
+public class RuntimeEnvironment {
   private static var _isProduction: Bool? = nil
-  static var isProduction: Bool {
+  public static var isProduction: Bool {
     get {
       if _isProduction == nil {
-        fatalError("isProduction not set.")
+        print("RuntimeEnvironment.isProduction is not set, the default value is false.")
+        _isProduction = false
       }
       return _isProduction!
     }

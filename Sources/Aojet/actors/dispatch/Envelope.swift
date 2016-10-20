@@ -7,20 +7,20 @@
 //
 
 /// Actor system envelope
-class Envelope: CustomStringConvertible {
+public class Envelope: CustomStringConvertible {
 
   /// Message in envelope
-  final let message: Any
+  public final let message: Any
 
   /// Sender of message
-  final let sender: ActorRef?
+  public final let sender: ActorRef?
 
 
   /// Mailbox for envelope
-  final let mailbox: Mailbox
+  public final let mailbox: Mailbox
 
-  final let scope: ActorScope
-  final let sendTime: TimeInterval
+  public final let scope: ActorScope
+  public final let sendTime: TimeInterval
 
 
   /// Creating of envelope
@@ -37,7 +37,7 @@ class Envelope: CustomStringConvertible {
     self.sendTime = ActorTime.currentTime()
   }
 
-  var description: String {
+  public var description: String {
     get {
       return "{\(message) -> \(scope.path)}"
     }

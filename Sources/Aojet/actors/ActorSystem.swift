@@ -20,7 +20,7 @@ public class ActorSystem {
 
   final var dispatchers: Dictionary<String, ActorDispatcher> = Dictionary()
   private let dispatchersLock = Runtime.createLock()
-  var traceInterface: TraceInterface?
+  public var traceInterface: TraceInterface?
 
   public convenience init() {
     self.init(addDefaultDispatcher: true)

@@ -10,7 +10,7 @@ import Foundation
 
 open class AskableActor: Actor {
   open func onAsk(message: Any) throws -> Promise<Any>? {
-    throw RuntimeException.general(message: "Not implemented")
+    throw RuntimeException.general(message: "Not handled")
   }
 
   override open func onReceive(message: Any) throws {
@@ -19,6 +19,7 @@ open class AskableActor: Actor {
       do {
         let p = try onAsk(message: askRequest.message)
         if p == nil {
+          // Just ignore. We assume that message is stashed
           return
         }
         p!.pipeTo(resolver: askRequest.future)

@@ -13,11 +13,11 @@ class LogRuntimeProvider: LogRuntime {
   }
 
   func error(tag: String, error: Error) {
-    print("ERROR \(tag): \(error)")
+    print("ERROR   \(tag): \(error)")
   }
 
   func debug(tag: String, message: String) {
-    print("DEBUG \(tag): \(message)")
+    print("DEBUG   \(tag): \(message)")
   }
 
   func verbose(tag: String, message: String) {

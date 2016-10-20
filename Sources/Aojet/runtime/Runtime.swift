@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias TimeInterval = Foundation.TimeInterval
+public typealias TimeInterval = Foundation.TimeInterval
 class Runtime {
   private static let dispatcherRuntime: DispatcherRuntime =  DispatcherRuntimeProvider()
   private static let threadingRuntime: ThreadingRuntime =  ThreadingRuntimeProvider()
