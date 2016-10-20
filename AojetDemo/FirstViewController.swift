@@ -24,13 +24,30 @@ class FirstViewController: UIViewController {
   }
 
   @IBAction func onTap(_ sender: AnyObject) {
-    if demoActor == nil {
-      demoActor = DemoActor.create()
+    let actorSystem = ActorSystem.system
+    actorSystem.traceInterface = ActorTrace()
+    let actor = try! actorSystem.actorOf(path: "testActor", creator: AnyActorCreator{ () -> Actor in
+      return SomeActor()
+    })
+
+    demoActor = actor
+    let p1: Promise<String> = actor.ask(message: SomeActor.DoSomething(object: "An object for ask"))
+    p1.then { (res) in
+      print("Ask response:\(res)")
+      }.failure { (error) in
+        print("Ask error:\(error)")
     }
-    let p: Promise<String> = demoActor!.ask(message: DemoActor.InitActor())
-    p.then {
-      print($0)
-    }
+
+    actor.send(message: "An string")
+    actor.send(message: SomeActor.DoSomething(object: "Another object"))
+
+//    if demoActor == nil {
+//      demoActor = DemoActor.create()
+//    }
+//    let p: Promise<String> = demoActor!.ask(message: DemoActor.InitActor())
+//    p.then {
+//      print($0)
+//    }
 //    DispatchQueue.global().async {
 //    ThreadDispatcher.pushDispatcher { (runnable: Runnable) in
 ////      if Thread.current == Thread.main {

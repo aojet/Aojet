@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C33E4671DB87E4000F6BB58 /* ActorTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C33E4661DB87E4000F6BB58 /* ActorTrace.swift */; };
+		8C33E4681DB87E4000F6BB58 /* ActorTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C33E4661DB87E4000F6BB58 /* ActorTrace.swift */; };
+		8C33E46A1DB89DB700F6BB58 /* SomeActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C33E4691DB89DB700F6BB58 /* SomeActor.swift */; };
 		8C3F57181DA7348C00FBD824 /* Aojet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C3F570E1DA7348C00FBD824 /* Aojet.framework */; };
 		8C3F571F1DA7348C00FBD824 /* Aojet.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C3F57111DA7348C00FBD824 /* Aojet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C3F57E51DA7373B00FBD824 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F57E41DA7373B00FBD824 /* AppDelegate.swift */; };
@@ -199,6 +202,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C33E4661DB87E4000F6BB58 /* ActorTrace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActorTrace.swift; sourceTree = "<group>"; };
+		8C33E4691DB89DB700F6BB58 /* SomeActor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SomeActor.swift; sourceTree = "<group>"; };
 		8C3F570E1DA7348C00FBD824 /* Aojet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Aojet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3F57111DA7348C00FBD824 /* Aojet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Aojet.h; sourceTree = "<group>"; };
 		8C3F57121DA7348C00FBD824 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -385,6 +390,7 @@
 				8C3F57EF1DA7373B00FBD824 /* LaunchScreen.storyboard */,
 				8C3F57F21DA7373B00FBD824 /* Info.plist */,
 				8C3F58161DA737D000FBD824 /* DemoActor.swift */,
+				8C33E4691DB89DB700F6BB58 /* SomeActor.swift */,
 			);
 			path = AojetDemo;
 			sourceTree = "<group>";
@@ -506,6 +512,7 @@
 			isa = PBXGroup;
 			children = (
 				8C5EFD871DB4D51800885B4E /* BounceFilterActor.swift */,
+				8C33E4661DB87E4000F6BB58 /* ActorTrace.swift */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -781,6 +788,7 @@
 				8C5EFE3C1DB4D51900885B4E /* MainThreadRuntime.swift in Sources */,
 				8C5EFDD61DB4D51800885B4E /* ActorEndpoint.swift in Sources */,
 				8C5EFE381DB4D51900885B4E /* Log.swift in Sources */,
+				8C33E4671DB87E4000F6BB58 /* ActorTrace.swift in Sources */,
 				8C5EFDCC1DB4D51800885B4E /* ActorTime.swift in Sources */,
 				8C5EFE4C1DB4D51900885B4E /* Dispatcher.swift in Sources */,
 				8C5EFE1E1DB4D51900885B4E /* LockProvider.swift in Sources */,
@@ -867,6 +875,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3F58171DA737D000FBD824 /* DemoActor.swift in Sources */,
+				8C33E46A1DB89DB700F6BB58 /* SomeActor.swift in Sources */,
 				8C3F57E91DA7373B00FBD824 /* SecondViewController.swift in Sources */,
 				8C3F57E51DA7373B00FBD824 /* AppDelegate.swift in Sources */,
 				8C3F57E71DA7373B00FBD824 /* FirstViewController.swift in Sources */,
@@ -887,6 +896,7 @@
 				8C5EFE3D1DB4D51900885B4E /* MainThreadRuntime.swift in Sources */,
 				8C5EFDD71DB4D51800885B4E /* ActorEndpoint.swift in Sources */,
 				8C5EFE391DB4D51900885B4E /* Log.swift in Sources */,
+				8C33E4681DB87E4000F6BB58 /* ActorTrace.swift in Sources */,
 				8C5EFDCD1DB4D51800885B4E /* ActorTime.swift in Sources */,
 				8C5EFE4D1DB4D51900885B4E /* Dispatcher.swift in Sources */,
 				8C5EFE1F1DB4D51900885B4E /* LockProvider.swift in Sources */,
@@ -1268,6 +1278,7 @@
 				8C5EFD5C1DB4D39700885B4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
