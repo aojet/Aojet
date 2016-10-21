@@ -41,8 +41,8 @@ public extension ActorRef {
   public func ask<T>(message: Any, sender: ActorRef?) -> Promise<T> {
     return Promise<Any>(executor: AnyPromiseFunc { (executor) in
       self.send(message: AskInternalRequest(message: message, future: executor), sender: sender)
-    }).map { (r) -> T? in
-      return r as? T
+    }).map { (r) -> T in
+      return r as! T
     }
   }
 

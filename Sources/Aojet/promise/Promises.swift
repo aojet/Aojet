@@ -32,9 +32,9 @@ public class Promises {
       return t
     }
     let p: Promise<Array<Any?>> = PromisesArray<Any?>.ofPromises(items: t1, t2).zip()
-    return p.map(AnyFunction { (src) -> (R1, R2)? in
-      let r1 = src![0] as! R1
-      let r2 = src![1] as! R2
+    return p.map(AnyFunction { (src) -> (R1, R2) in
+      let r1 = src[0] as! R1
+      let r2 = src[1] as! R2
       return (r1, r2)
     })
   }
@@ -50,10 +50,10 @@ public class Promises {
       return t
     }
     let p: Promise<Array<Any?>> = PromisesArray<Any?>.ofPromises(items: t1, t2, t3).zip()
-    return p.map(AnyFunction { (src) -> (R1, R2, R3)? in
-      let r1 = src![0] as! R1
-      let r2 = src![1] as! R2
-      let r3 = src![2] as! R3
+    return p.map(AnyFunction { (src) -> (R1, R2, R3) in
+      let r1 = src[0] as! R1
+      let r2 = src[1] as! R2
+      let r3 = src[2] as! R3
       return (r1, r2, r3)
     })
   }
@@ -72,31 +72,31 @@ public class Promises {
       return t
     }
     let p: Promise<Array<Any?>> = PromisesArray<Any?>.ofPromises(items: t1, t2, t3, t4).zip()
-    return p.map(AnyFunction { (src) -> (R1, R2, R3, R4)? in
-      let r1 = src![0] as! R1
-      let r2 = src![1] as! R2
-      let r3 = src![2] as! R3
-      let r4 = src![3] as! R4
+    return p.map(AnyFunction { (src) -> (R1, R2, R3, R4) in
+      let r1 = src[0] as! R1
+      let r2 = src[1] as! R2
+      let r3 = src[2] as! R3
+      let r4 = src[3] as! R4
       return (r1, r2, r3, r4)
     })
   }
 
-  class func _traverse<R>(queue: inout Array<AnySupplier<Promise<R>>>) -> Promise<R> {
+  class func _traverse<R>(queue: inout Array<AnySupplier<Promise<R>>>) -> Promise<R?> {
     var queue = queue
     if queue.count == 0 {
       return Promise.success(value: nil)
     }
-    return queue.remove(at: 0).get().flatMap(AnyFunction { (v) -> Promise<R> in
+    return queue.remove(at: 0).get().flatMap(AnyFunction { (v) -> Promise<R?> in
       _traverse(queue: &queue)
     })
   }
 
-  class func traverse<R>(queue: Array<AnySupplier<Promise<R>>>) -> Promise<R> {
+  class func traverse<R>(queue: Array<AnySupplier<Promise<R>>>) -> Promise<R?> {
     var queue = queue
     return _traverse(queue: &queue)
   }
 
-  public class func traverse<R>(queue: Array<()->Promise<R>>) -> Promise<R> {
+  public class func traverse<R>(queue: Array<()->Promise<R>>) -> Promise<R?> {
     let q = queue.map { (closure) -> AnySupplier<Promise<R>> in
       return AnySupplier(closure)
     }
