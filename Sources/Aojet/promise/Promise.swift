@@ -7,7 +7,7 @@
 //
 
 public class Promise<R> {
-  public static func success(value: R?) -> Promise<R> {
+  public static func success(value: R) -> Promise<R> {
     return Promise(value: value)
   }
 
@@ -38,7 +38,7 @@ public class Promise<R> {
     self.init(executor: AnyPromiseFunc(executor))
   }
 
-  public init(value: R?) {
+  public init(value: R) {
     dispatcher = ThreadDispatcher.peekDispatcherOptional()
     result = value
     error = nil
@@ -53,17 +53,17 @@ public class Promise<R> {
   }
 
   @discardableResult
-  func then(_ then: AnyConsumer<R?>) -> Promise<R> {
+  func then(_ then: AnyConsumer<R>) -> Promise<R> {
     lock.lock()
     defer { lock.unlock() }
     if isFinished {
       if error == nil {
         if dispatcher != nil {
           dispatcher!.dispatch(runnable: AnyRunnable {
-            try! then.apply(self.result)
+            try! then.apply(self.result!)
           })
         } else {
-          try! then.apply(result)
+          try! then.apply(result!)
         }
       }
     } else {
@@ -83,7 +83,7 @@ public class Promise<R> {
   }
 
   @discardableResult
-  public func then(_ closure: @escaping (R?) -> ()) -> Promise<R> {
+  public func then(_ closure: @escaping (R) -> ()) -> Promise<R> {
     return then(AnyConsumer(closure))
   }
 
@@ -184,18 +184,18 @@ public class Promise<R> {
       }
     } else {
       for callback in callbacks {
-        callback.onResult(t: result)
+        callback.onResult(t: result!)
       }
     }
     callbacks.removeAll()
   }
 
-  func map<R1>(_ func: AnyFunction<R?, R1?>) -> Promise<R1> {
+  func map<R1>(_ func: AnyFunction<R, R1>) -> Promise<R1> {
     return Promise<R1>(executor: AnyPromiseFunc { [weak self] (resolver) in
       guard let strongSelf = self else {
         return
       }
-      strongSelf.then(AnyConsumer<R?> { (t) in
+      strongSelf.then(AnyConsumer<R> { (t) in
         let r = `func`.apply(t)
         resolver.tryResult(r)
       })
@@ -205,7 +205,7 @@ public class Promise<R> {
     })
   }
 
-  public func map<R1>(_ closure: @escaping (R?) -> R1?) -> Promise<R1> {
+  public func map<R1>(_ closure: @escaping (R) -> R1) -> Promise<R1> {
     return map(AnyFunction(closure))
   }
 
@@ -214,7 +214,7 @@ public class Promise<R> {
       guard let strongSelf = self else {
         return
       }
-      strongSelf.then(AnyConsumer<R?> { (t) in
+      strongSelf.then(AnyConsumer<R> { (t) in
         resolver.tryResult(t)
       })
       strongSelf.failure(AnyConsumer { (e) in
@@ -231,12 +231,12 @@ public class Promise<R> {
     return changeDispatcher(AnySimpleDispatcher(dispatch))
   }
 
-  func flatMap<R1>(_ func: AnyFunction<R?, Promise<R1>>) -> Promise<R1> {
+  func flatMap<R1>(_ func: AnyFunction<R, Promise<R1>>) -> Promise<R1> {
     return Promise<R1>(executor: AnyPromiseFunc { [weak self] (resolver) in
       guard let strongSelf = self else {
         return
       }
-      strongSelf.then(AnyConsumer<R?> { (t) in
+      strongSelf.then(AnyConsumer<R> { (t) in
         let promise = `func`.apply(t)
         promise.then(AnyConsumer { (t2) in
           resolver.result(t2)
@@ -251,16 +251,16 @@ public class Promise<R> {
     })
   }
 
-  public func flatMap<R1>(_ closure: @escaping (R?) -> (Promise<R1>)) -> Promise<R1> {
+  public func flatMap<R1>(_ closure: @escaping (R) -> (Promise<R1>)) -> Promise<R1> {
     return flatMap(AnyFunction(closure))
   }
 
-  func chain<R1>(_ func: AnyFunction<R?, Promise<R1>>) -> Promise<R> {
+  func chain<R1>(_ func: AnyFunction<R, Promise<R1>>) -> Promise<R> {
     return Promise<R>(executor: AnyPromiseFunc { [weak self] (resolver) in
       guard let strongSelf = self else {
         return
       }
-      strongSelf.then(AnyConsumer<R?> { (t) in
+      strongSelf.then(AnyConsumer<R> { (t) in
         let chained = `func`.apply(t)
         chained.then(AnyConsumer { (t2) in
           resolver.result(t)
@@ -275,7 +275,7 @@ public class Promise<R> {
     })
   }
 
-  public func chain<R1>(_ closure: @escaping (R?) -> (Promise<R1>)) -> Promise<R> {
+  public func chain<R1>(_ closure: @escaping (R) -> (Promise<R1>)) -> Promise<R> {
     return chain(AnyFunction(closure))
   }
 
@@ -312,7 +312,7 @@ public class Promise<R> {
       guard let strongSelf = self else {
         return
       }
-      strongSelf.then(AnyConsumer<R?> { (r) in
+      strongSelf.then(AnyConsumer<R> { (r) in
           resolver.result(r)
       })
       strongSelf.failure(AnyConsumer { (e) in
@@ -336,7 +336,7 @@ public class Promise<R> {
     return Promise<R>(executor: AnyPromiseFunc { (resolver) in
       self.then(AnyConsumer { (t) in
         var r = t
-        if r == nil {
+        if r is ExpressibleByNilLiteral && r as? ExpressibleByNilLiteral == nil {
           r = producer.get()
           resolver.result(r)
         } else {
@@ -356,7 +356,7 @@ public class Promise<R> {
   func mapIfNullPromise(producer: AnySupplier<Promise<R>>) -> Promise<R> {
     return Promise<R>(executor: AnyPromiseFunc { (resolver) in
       self.then(AnyConsumer { (t) in
-        if t == nil {
+        if t is ExpressibleByNilLiteral && t as? ExpressibleByNilLiteral == nil {
           let promise = producer.get()
           promise.then(AnyConsumer { (t2) in
             resolver.result(t2)
@@ -392,14 +392,14 @@ public class Promise<R> {
 
 protocol PromiseCallback: Identifiable {
   associatedtype R
-  func onResult(t: R?)
+  func onResult(t: R)
   func onError(e: Error)
 }
 
 class AnyPromiseCallback<R>: PromiseCallback, IdentifierHashable {
   private let _base: Any?
   let objectId: Identifier
-  private let _onResult: (_ t: R?) -> ()
+  private let _onResult: (_ t: R) -> ()
   private let _onError: (_ e: Error) -> ()
 
   init<R1: PromiseCallback>(base: R1) where R1.R == R {
@@ -409,14 +409,14 @@ class AnyPromiseCallback<R>: PromiseCallback, IdentifierHashable {
     _onError = base.onError
   }
 
-  init(onResult: @escaping (_ t: R?)->(), onError: @escaping (_ e: Error) -> ()) {
+  init(onResult: @escaping (_ t: R)->(), onError: @escaping (_ e: Error) -> ()) {
     _base = nil
     objectId = type(of: self).generateObjectId()
     _onResult = onResult
     _onError = onError
   }
 
-  func onResult(t: R?) {
+  func onResult(t: R) {
     _onResult(t)
   }
 
